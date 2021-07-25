@@ -10,6 +10,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using dotnetcore.Extensions;
 using Microsoft.AspNetCore.HttpOverrides;
+using Microsoft.EntityFrameworkCore;
+using dotnetcore.Data;
 
 namespace dotnetcore
 {
@@ -28,6 +30,9 @@ namespace dotnetcore
             services.ConfigureCors();
             services.ConfigureIISIntegration();
             services.AddRazorPages();
+
+            services.AddDbContext<dotnetcoreContext>(options =>
+                    options.UseSqlServer(Configuration.GetConnectionString("dotnetcoreContext")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
